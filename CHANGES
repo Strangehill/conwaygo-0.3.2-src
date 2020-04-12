@@ -1,0 +1,64 @@
+2004-12-23, Version 0.3.2a3
+- documentation: explanation JGobang
+- target "test" in buildfile
+- start script for Windows is created
+- fixes a multithreading bug that sometimes appears when starting
+- increase default value for animation speed
+- workaround for drawOval bug in Windows environments
+- fix i18n bug for displaying information about invalid moves
+- small GameEvent API change
+- Error message error.move.jump_zero removed; is contained in error.move.empty
+- setPiece renamed to addPiece
+- first junit test case
+ 
+2004-08-02, Version 0.3.1
+- localization for help files (feature)
+- language support: german (feature)
+- option: set animation speed (feature)
+- BoardComponent now resizable; automatic adjustment of all sizes (feature)
+- Releases: zip and tgz files (feature)
+- NoRecursionTemplate: removed recursive reference in inner class (bug fix)
+- DefaultGame: set playing state before sending events (bug fix)
+- DefaultGame: fix error when setting the same engine twice (bug fix)
+- AbstractEngine: unified usage of random numbers, better i18n support (API improvement)
+- BackgroundGame: interface for games in background thread (API improvement)
+- Board: substituted method set() with setPiece() and removePiece() (API improvement)
+- BoardComponent: temporary board removed; now works completely on clone of board (API improvement)
+
+2004-07-23, Version 0.3
+- localization for all strings
+- applet version of conwaygo written and published
+- a simple icon for the window
+- defining custom tag for javadoc: threadsafe
+- improved error handling
+- improved API documentation
+- calls initGame (formerly called startGame) when engine changes during game (bug fix)
+- BoardComponent.Caret removed (bug fix)
+- menue option "abort game" possible (bug fix)
+
+2004-07-12, Version 0.2.3
+- load initial engine setting from configuration
+- starts game automatically after startup
+- moved documentation to directory "doc"
+- bugfixes in buildfile
+
+2004-07-11, Version 0.2.2:
+- Main-class defined in jar
+- Version information now stored in properties file, not in java class
+- engines separated by type in menues and in property file
+- menu option: show engine info
+- Homepage included in project and used as help files in program
+
+2004-05-26, Version 0.2.1
+- "abort game" still buggy, removed from menu
+- first (inofficial) tournament classes
+- buildfile much improved, for building and distribution
+- created separate directories for resources
+- renamed strategies
+- new strategy ("level 1") for beginners
+- new strategy: FiveTypes = "5T Experimental"
+- strategies list now in properties file, removed class EngineFactory
+- fixed some bugs
+
+2004-01-05, Version 0.2
+First usable version

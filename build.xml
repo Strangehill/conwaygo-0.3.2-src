@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+
+<!--
+
+ Build file for ConwayGo.
+
+ Author(s): michael@tabacha.de
+ $Id: build.xml,v 1.31 2004/12/23 22:24:42 mk Exp $
+
+-->
+
+
+<project name="conwaygo" default="all" basedir=".">
+
+<description>ConwayGo, also called GoFishGo or philosophers' football</description>
+
+
+<!-- =================== Initializes the build process ==================== -->
+
+<target name="init">
+  <tstamp/>
+
+  <!-- load information about version etc. -->
+  <property name="properties.file" value="project.properties"/>
+  <property file="${properties.file}"/>
+  
+  <!-- directories -->
+  <property name="src.dir"       location="src"/>
+  <property name="resource.dir"  location="resources"/>
+  <property name="test.dir"      location="test"/>
+  <property name="doc.dir"       location="doc"/>
+  <property name="build.dir"     location="build"/>
+  <property name="build.bin.dir" location="${build.dir}/bin"/>
+  <property name="class.dir"     location="${build.dir}/classes"/>
+  <property name="build.test.dir" location="${build.dir}/test"/>
+  <property name="build.doc.dir" location="${build.dir}/doc"/>
+  <property name="javadoc.dir"   location="${build.doc.dir}/javadoc"/>
+  <property name="dist.dir"      location="dist"/>
+
+  <!-- compiler settings -->
+  <property name="debug"       value="on"/>
+  <property name="optimize"    value="off"/>
+  <property name="deprecation" value="on"/>
+
+  <!-- packages and classes -->
+  <property name="base.package.dir" value="de/tabacha/cgo"/>
+  <property name="main.class"       value="de.tabacha.cgo.gui.ConwayGo"/>
+  <property name="applet.packages"  value="de/tabacha/cgo/* de/tabacha/cgo/strategy/* de/tabacha/cgo/gui/*"/>
+
+</target>
+
+
+<!-- ================== All: build,doc ========================= -->
+
+<target name="all" depends="build,doc"
+        description="Builds whole project, code, documentation"/>
+
+
+<!-- ================== Build/compile ====================== -->
+
+<target name="build" depends="javac,startscripts" description="Builds the product"/>
+
+<target name="compile" depends="javac"/>
+<target name="javac" depends="init" description="Compiles the sources">
+  <mkdir dir="${class.dir}"/>
+  <javac srcdir="${src.dir}"
+	 destdir="${class.dir}"
+	 debug="${debug}"
+	 optimize="${optimize}"
+	 deprecation="${deprecation}"
+	 />	 
+</target>
+
+<target name="startscripts" depends="init">
+  <mkdir dir="${build.bin.dir}"/>
+
+  <property name="unix.script" value="${build.bin.dir}/${ant.project.name}.sh"/>
+  <echo file="${unix.script}">#!/bin/sh
+java -classpath ${resource.dir}:${class.dir}:$$CLASSPATH ${main.class}
+</echo>
+  <chmod file="${unix.script}" perm="755"/>
+
+  <property name="windows.script" value="${build.bin.dir}/${ant.project.name}.bat"/>
+  <echo file="${windows.script}">java -classpath ${resource.dir};${class.dir};%CLASSPATH% ${main.class}
+</echo>
+
+</target>
+
+
+<!-- ========= Runs the tests ====================== -->
+
+<target name="test" depends="junit" description="Runs all automatic tests (needs junit.jar in classpath)"/>
+<target name="junit" depends="init,compile,compile_tests">
+  <junit>
+     <classpath>
+       <pathelement location="${resource.dir}"/>
+       <pathelement location="${class.dir}"/>
+       <pathelement location="${build.test.dir}"/>
+       <pathelement path="${java.class.path}"/>
+     </classpath>
+     <formatter type="brief" usefile="false"/>
+     <batchtest>
+       <fileset dir="${test.dir}" includes="**/*Test.java"/>
+     </batchtest>
+  </junit>
+</target>
+
+<target name="compile_tests" depends="compile">
+  <mkdir dir="${build.test.dir}"/>
+  <javac srcdir="${test.dir}"
+	 destdir="${build.test.dir}"
+	 debug="${debug}"
+	 optimize="${optimize}"
+	 deprecation="${deprecation}">
+     <classpath>
+       <pathelement location="${class.dir}"/>
+       <pathelement path="${java.class.path}"/>
+     </classpath>
+  </javac>
+</target>  
+
+
+<!-- ========= creates the documentation =========== -->
+
+<target name="doc" depends="init,javadoc,applet.jar" description="Creates all documentation">
+  <copy todir="${build.doc.dir}">
+    <fileset dir="${doc.dir}"/>
+  </copy>
+</target>
+
+<target name="javadoc" depends="init" description="Creates the api documentation">
+  <delete dir="${javadoc.dir}" quiet="true"/>
+  <mkdir dir="${javadoc.dir}"/>
+  <javadoc
+	   destdir="${javadoc.dir}"
+	   access="package"
+	   author="off"
+	   version="on"
+	   use="on"
+	   windowtitle="${ant.project.name}"
+	   overview="${src.dir}/overview.html"
+	   >
+	<packageset dir="${src.dir}" defaultexcludes="yes">
+	  <include name="${base.package.dir}/**"/>
+	</packageset>
+        <tag name="threadsafe" description="Threadsafe?" scope="types,methods"/>
+      </javadoc>
+</target>
+
+<target name="applet.jar" depends="init,compile">
+  <jar destfile="${build.doc.dir}/${ant.project.name}.jar"
+       index="true">
+     <fileset dir="${resource.dir}" includes="${applet.packages}"/>
+     <fileset dir="${class.dir}"    includes="${applet.packages}"/>
+  </jar>
+</target>
+
+
+<!-- ========= publish a new release/version =========== -->
+
+<target name="release" depends="newversion,release.src,release.doc,release.jar" description="Publish a new release"/>
+
+<target name="newversion" depends="init">
+      <echo message="Date of old version: ${version_date}"/>
+      <echo message="Old version: ${version}"/>
+      <echo/>
+      <property name="new_version_date" value="${DSTAMP}"/>
+      <echo message="Today: ${new_version_date}"/>
+      <input message="Enter new version: " addproperty="new_version"/>
+      <echo file="${properties.file}"># DO NOT EDIT - Generated from buildfile
+name=${ant.project.name}
+version=${new_version}
+version_date=${new_version_date}
+</echo>
+      <echo file="${resource.dir}/${base.package.dir}/${properties.file}"># DO NOT EDIT - Generated from buildfile
+name=${ant.project.name}
+version=${new_version}
+version_date=${new_version_date}
+</echo>
+</target>
+    
+<target name="create_dist_dir" depends="init">
+  <mkdir dir="${dist.dir}"/>  
+</target>
+
+<target name="release.src" depends="create_dist_dir,newversion">
+  <tar destfile="${dist.dir}/${ant.project.name}-${new_version}-src.tgz"
+       basedir="${basedir}"
+       compression="gzip"
+       excludes="CVS/** **/CVS/** build/** dist/** my/** *~ src/**/vorlage"/>
+  <zip destfile="${dist.dir}/${ant.project.name}-${new_version}-src.zip"
+       basedir="${basedir}"
+       excludes="CVS/** **/CVS/** build/** dist/** my/** *~ src/**/vorlage"/>
+</target>
+    
+<target name="release.doc" depends="doc,create_dist_dir,newversion">
+  <tar destfile="${dist.dir}/${ant.project.name}-${new_version}-doc.tgz"
+       basedir="${build.doc.dir}"
+       compression="gzip"
+       excludes="CVS/** **/CVS/** *~"/>
+  <zip destfile="${dist.dir}/${ant.project.name}-${new_version}-doc.zip"
+       basedir="${build.doc.dir}"
+       excludes="CVS/** **/CVS/** *~"/>
+</target>
+
+<target name="release.jar" depends="compile,create_dist_dir,newversion">
+  <jar destfile="${dist.dir}/${ant.project.name}-${new_version}.jar"
+       index="true">
+     <manifest>
+       <attribute name="Main-Class" value="${main.class}"/>
+     </manifest>
+     <fileset dir="${resource.dir}"/>
+     <fileset dir="${class.dir}"/>
+  </jar>
+</target>
+
+
+<!-- ========= runs the program ====================== -->
+
+<target name="java" depends="run"/>
+<target name="run" depends="init" description="Runs the program">
+  <java
+	classname="${main.class}"
+	fork="yes">
+     <classpath>
+       <pathelement location="${resource.dir}"/>
+       <pathelement location="${class.dir}"/>
+       <pathelement path="${java.class.path}"/>
+     </classpath>
+  </java>
+</target>
+
+
+
+<!-- ========= removes all automatically built files and directories ======= -->
+
+<target name="clean" depends="init" description="Removes all automatically built files and directories">
+    <delete dir="${build.dir}" quiet="true"/>
+    <delete dir="${dist.dir}"  quiet="true"/>
+</target>
+
+
+</project>

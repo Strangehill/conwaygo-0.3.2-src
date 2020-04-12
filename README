@@ -1,0 +1,30 @@
+ConwayGo, also called philosophers' football, is a simple board game for two players.
+It is played on a Go board, but hasn't got anything to do with the famous game Go.
+The goal is to move a ball to the base line to the enemy.
+Invented by the english mathematician John Conway, the creator of the 'Game of Life'.
+
+Programming language:
+Java
+
+Libraries needed:
+None (only the core libraries contained in J2SE)
+
+Platforms:
+All OS for desktops
+
+Why this? 
+It's an easy and interesting game, and there is no other computer program for playing it.
+
+Current features:
+- Swing GUI
+- Playing human-human, human-engine, engine-engine
+- Four different engine levels
+
+Planned features:
+- internationalization
+- Easy way to plug-in self-written engines
+- Tournament mode (for engine comparison)
+- Applet version
+- Auto-installation with Java WebStart
+
+Homepage: http://conwaygo.sourceforge.net

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ConwayGo: Rules</title>
+    <link rel="stylesheet" type="text/css" href="cgo.css">
+  </head>
+  <body>
+    <h1>ConwayGo: Rules</h1>
+
+      <p>
+	It's a simple game. There are only two types of pieces:<br>
+	First, the <b>ball</b>: <img src="images/ball.gif" alt="ball" align="middle" hspace="2" vspace="5">;
+	second, the <b>players</b>: <img src="images/player.gif" alt="player" align="middle" hspace="2" vspace="5"><br>
+      </p>
+      <p>
+	And two types of moves exist:
+      </p>
+    <ol>
+      <li>
+	<b>Put a player on the board.</b><br>
+	When the mouse cursor is over an empty place of the board,
+	a blue ring is shown:
+	<img src="images/put.gif" alt="Place to add a player" align="middle" hspace="2" vspace="5">.
+	Click a mouse key and a blue ball is added at this place.
+	(The players are also called "philosophers" because they never move.
+	You remember the Monty Python's version of "philosophers' football"?)
+	<br><br>
+      </li>
+      <li>
+	<b>Jump with the ball.</b><br>
+	Move the mouse cursor over the ball.
+	If there is an adjacent player, a red ring is shown around the ball:
+	<img src="images/jump_0.gif" alt="Able to enter jump mode" align="middle" hspace="2" vspace="5"><br>
+	Click to enter the jump mode; then click on the target field.
+	<br>
+	The ball jumps over an adjacent player and lands directly behind him, the player is removed:
+	<img src="images/jump_0.gif" alt="before" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_1.gif" alt="during" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_2.gif" alt="after" align="middle" hspace="2" vspace="5">
+	<br>
+	You can move in all 8 directions and also over several players at once:
+	<img src="images/jump_3.gif" alt="before" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_4.gif" alt="during" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_5.gif" alt="after" align="middle" hspace="2" vspace="5">
+	<br>
+	And you can jump several times in one move:
+	<img src="images/jump_several_0.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_1.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_2.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_3.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_4.gif" alt="jump example" align="middle" hspace="2" vspace="5">
+	<br>
+	It is not allowed to jump off the board on the left or the right side.
+	<br>
+      </li>
+    </ol>
+
+    <p>
+      The <b>goal of the game</b> is to reach or to exceed the base line of the enemy with the ball.
+      <br>
+      The first player plays to the top, the second to the bottom of the field.
+    </p>
+    <p>      
+      That's all!
+    </p>
+    <!--
+      <hr>
+      <div align="center">
+	<a href="index.html">Back to main page</a>
+      </div>
+    -->
+  </body>
+</html>

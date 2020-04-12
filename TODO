@@ -1,0 +1,25 @@
+BUGS
+none known
+
+FEATURES
+- CVS on sourceforge
+- menu entry: plug-in other engines
+- Java WebStart
+- time limit for moves
+- tournament mode
+
+ENGINE IMPROVEMENT
+NoRecursionTemplate
+- collect all best jumps after a put
+FiveTypes
+- trapez
+- near the base lines, jump is often better than put
+- ags
+
+TESTING
+- write unit tests
+
+DOCUMENTATION
+- writing and plugging-in own engines
+- NoRecursionTemplate: Needs more comments. Useful for developers to inherit own engines from.
+- installation procedure

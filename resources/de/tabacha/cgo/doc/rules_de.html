@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ConwayGo: Regeln</title>
+    <link rel="stylesheet" type="text/css" href="cgo.css">
+  </head>
+  <body>
+    <h1>ConwayGo: Regeln</h1>
+
+    <p>
+      ConwayGo ist ein einfaches Spiel. Es gibt zwei Arten von Figuren:<br>
+      Erstens den <b>Ball</b>: <img src="images/ball.gif" alt="ball" align="middle" hspace="2" vspace="5">,
+      zweitens die <b>Spieler</b>: <img src="images/player.gif" alt="player" align="middle" hspace="2" vspace="5">.<br>
+    </p>
+    <p>
+      Und es gibt auch zwei Arten von Zügen:
+    </p>
+    <ol>
+      <li>
+	<b>Setze einen Spieler auf das Spielbrett.</b><br>
+	Befindet sich der Mauscursor über einem leeren Feld auf dem Brett,
+	wird ein blauer Ring angezeigt:
+	<img src="images/put.gif" alt="Place to add a player" align="middle" hspace="2" vspace="5">.
+	Durch Drücken der Maustaste wird ein Spieler aufs Brett gesetzt.
+	(Die Spieler werden auch "Philosophen" genannt, da sie sich nie bewegen.)
+	<br><br>
+      </li>
+      <li>
+	<b>Springe mit dem Ball.</b><br>
+	Bewege den Mauscursor über den Ball.
+	Falls es direkt neben dem Ball (gerade oder schräg) einen Spieler gibt, wird
+	ein roter Ring um den Ball herum angezeigt:
+	<img src="images/jump_0.gif" alt="Kann in den Sprungmodus wechseln" align="middle" hspace="2" vspace="5"><br>
+	Klicke auf den Ball, um das Springen zu beginnen; danach klicke auf das Zielfeld.
+	<br>
+	Der Ball hüpft über den angrenzenden Spieler und landet direkt hinter ihm,
+	wobei der Spieler vom Brett entfernt wird:
+	<img src="images/jump_0.gif" alt="before" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_1.gif" alt="during" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_2.gif" alt="after" align="middle" hspace="2" vspace="5">
+	<br>
+	Du kannst in alle 8 Richtungen und auch über mehrere Spieler auf einmal springen:
+	<img src="images/jump_3.gif" alt="before" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_4.gif" alt="during" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_5.gif" alt="after" align="middle" hspace="2" vspace="5">
+	<br>
+	Außerdem kannst Du in einem Zug mehrmals springen:
+	<img src="images/jump_several_0.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_1.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_2.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_3.gif" alt="jump example" align="middle" hspace="2" vspace="5">&nbsp;<img src="images/jump_several_4.gif" alt="jump example" align="middle" hspace="2" vspace="5">
+	<br>
+	Der Ball darf nicht über den linken oder rechten Rand ins Aus springen.
+	<br>
+	</li>
+      </ol>
+
+      <p>
+	Das <b>Ziel des Spiels</b> ist es, den Ball auf die Grundreihe des Gegners (oder darüber hinaus)
+      zu bringen.
+      <br>
+      Der erste Spieler spielt nach oben, der zweite nach unten.
+      </p>
+      <p>      
+      Das ist alles!
+    </p>
+    <!--
+      <hr>
+      <div align="center">
+	<a href="index.html">Back to main page</a>
+      </div>
+    -->
+  </body>
+</html>
